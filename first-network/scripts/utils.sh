@@ -40,7 +40,7 @@ setGlobals() {
     if [ $PEER -eq 0 ]; then
       CORE_PEER_ADDRESS=peer0.org1.example.com:7051
     else
-      CORE_PEER_ADDRESS=peer1.org1.example.com:7051
+      CORE_PEER_ADDRESS=peer1.org1.example.com:8051
     fi
   elif [ $ORG -eq 2 ]; then
     CORE_PEER_LOCALMSPID="Org2MSP"
@@ -48,9 +48,9 @@ setGlobals() {
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
     CORE_PEER_BCCSP_PLUGIN_CONFIG_KEYSTOREPATH=${CORE_PEER_MSPCONFIGPATH}/keystore
     if [ $PEER -eq 0 ]; then
-      CORE_PEER_ADDRESS=peer0.org2.example.com:7051
+      CORE_PEER_ADDRESS=peer0.org2.example.com:9051
     else
-      CORE_PEER_ADDRESS=peer1.org2.example.com:7051
+      CORE_PEER_ADDRESS=peer1.org2.example.com:10051
     fi
 
   elif [ $ORG -eq 3 ]; then
@@ -59,9 +59,9 @@ setGlobals() {
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
     CORE_PEER_BCCSP_PLUGIN_CONFIG_KEYSTOREPATH=${CORE_PEER_MSPCONFIGPATH}/keystore
     if [ $PEER -eq 0 ]; then
-      CORE_PEER_ADDRESS=peer0.org3.example.com:7051
+      CORE_PEER_ADDRESS=peer0.org3.example.com:11051
     else
-      CORE_PEER_ADDRESS=peer1.org3.example.com:7051
+      CORE_PEER_ADDRESS=peer1.org3.example.com:12051
     fi
   else
     echo "================== ERROR !!! ORG Unknown =================="
@@ -281,9 +281,10 @@ parsePeerConnectionParameters() {
   PEER_CONN_PARMS=""
   PEERS=""
   while [ "$#" -gt 0 ]; do
+    setGlobals $1 $2
     PEER="peer$1.org$2"
     PEERS="$PEERS $PEER"
-    PEER_CONN_PARMS="$PEER_CONN_PARMS --peerAddresses $PEER.example.com:7051"
+    PEER_CONN_PARMS="$PEER_CONN_PARMS --peerAddresses $CORE_PEER_ADDRESS"
     if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "true" ]; then
       TLSINFO=$(eval echo "--tlsRootCertFiles \$PEER$1_ORG$2_CA")
       PEER_CONN_PARMS="$PEER_CONN_PARMS $TLSINFO"
