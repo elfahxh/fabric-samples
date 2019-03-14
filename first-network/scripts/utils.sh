@@ -26,6 +26,7 @@ setOrdererGlobals() {
   CORE_PEER_LOCALMSPID="OrdererMSP"
   CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
   CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/users/Admin@example.com/msp
+  CORE_PEER_BCCSP_PLUGIN_CONFIG_KEYSTOREPATH=${CORE_PEER_MSPCONFIGPATH}/keystore
 }
 
 setGlobals() {
@@ -35,6 +36,7 @@ setGlobals() {
     CORE_PEER_LOCALMSPID="Org1MSP"
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG1_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    CORE_PEER_BCCSP_PLUGIN_CONFIG_KEYSTOREPATH=${CORE_PEER_MSPCONFIGPATH}/keystore
     if [ $PEER -eq 0 ]; then
       CORE_PEER_ADDRESS=peer0.org1.example.com:7051
     else
@@ -44,6 +46,7 @@ setGlobals() {
     CORE_PEER_LOCALMSPID="Org2MSP"
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG2_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    CORE_PEER_BCCSP_PLUGIN_CONFIG_KEYSTOREPATH=${CORE_PEER_MSPCONFIGPATH}/keystore
     if [ $PEER -eq 0 ]; then
       CORE_PEER_ADDRESS=peer0.org2.example.com:7051
     else
@@ -54,6 +57,7 @@ setGlobals() {
     CORE_PEER_LOCALMSPID="Org3MSP"
     CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+    CORE_PEER_BCCSP_PLUGIN_CONFIG_KEYSTOREPATH=${CORE_PEER_MSPCONFIGPATH}/keystore
     if [ $PEER -eq 0 ]; then
       CORE_PEER_ADDRESS=peer0.org3.example.com:7051
     else

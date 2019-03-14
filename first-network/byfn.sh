@@ -355,6 +355,22 @@ function generateCerts() {
     exit 1
   fi
   echo
+  echo "##########################################################"
+  echo "##### Copy exitsted TLS certs into crypto-config  #########"
+  echo "##########################################################"
+  
+  #---------------------------------------------------------------
+  #. scripts/copy-certs.sh
+  # cp -R crypto-config-wo-plugin/* crypto-config
+  #---------------------------------------------------------------
+
+  res=$?
+  set +x
+  if [ $res -ne 0 ]; then
+    echo "Failed to copy exited TLS certificates..."
+    exit 1
+  fi
+  echo
 }
 
 # The `configtxgen tool is used to create four artifacts: orderer **bootstrap
